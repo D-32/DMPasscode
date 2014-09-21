@@ -47,7 +47,8 @@
     _error.textColor = [UIColor whiteColor];
     _error.backgroundColor = [UIColor colorWithRed:0.63 green:0.00 blue:0.00 alpha:1.00];
     _error.textAlignment = NSTextAlignmentCenter;
-    _error.layer.cornerRadius = 6;
+    _error.layer.cornerRadius = 4;
+    _error.clipsToBounds = YES;
     _error.alpha = 0;
     [self.view addSubview:_error];
     
