@@ -1,0 +1,2 @@
+language: objective-c
+script: xcodebuild -workspace DMPasscode.xcworkspace/ -scheme DMPasscode
