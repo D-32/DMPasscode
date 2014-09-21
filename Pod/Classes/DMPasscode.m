@@ -10,7 +10,9 @@
 #import "DMPasscodeInternalNavigationController.h"
 #import "DMPasscodeInternalViewController.h"
 #import "DMKeychain.h"
+#ifdef __IPHONE_8_0
 #import <LocalAuthentication/LocalAuthentication.h>
+#endif
 
 #undef NSLocalizedString
 #define NSLocalizedString(key, comment) \
@@ -72,6 +74,7 @@ static NSBundle* bundle;
 - (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion {
     NSAssert([self isPasscodeSet], @"No passcode set");
     _completion = completion;
+#ifdef __IPHONE_8_0
     LAContext* context = [[LAContext alloc] init];
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"", nil) reply:^(BOOL success, NSError* error) {
@@ -91,6 +94,9 @@ static NSBundle* bundle;
         // no touch id available
         [self openPasscodeWithMode:1 viewController:viewController];
     }
+#else
+    [self openPasscodeWithMode:1 viewController:viewController];
+#endif
 }
 
 - (void)removePasscode {
