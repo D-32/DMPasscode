@@ -5,11 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/DMPasscode.svg?style=flat)](http://cocoadocs.org/docsets/DMPasscode)
 [![Platform](https://img.shields.io/cocoapods/p/DMPasscode.svg?style=flat)](http://cocoadocs.org/docsets/DMPasscode)
 
-## Usage
+A simple passcode screen that can be displayed manually. If Touch ID is available the user can skip the screen and instead use his fingerprint to unlock.
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+![image](http://46.105.26.1/uploads/passcode.png)
 
 ## Installation
 
@@ -17,3 +15,16 @@ DMPasscode is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod "DMPasscode"
+If you're not using CocoaPods you'll find the source code files inside `Pod/Classes` and the localization files inside `Pod/Assets`.
+
+## Usage
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+The class `DMPasscode` contains following methods:
+	
+	+ (void)setupPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion;
+	+ (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion;
+	+ (void)removePasscode;
+	+ (BOOL)isPasscodeSet;
+ 
