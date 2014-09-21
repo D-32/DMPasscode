@@ -129,7 +129,7 @@ static NSBundle* bundle;
                 [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
                 _completion(YES);
             } else {
-                UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"dmpasscode_not_match", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"dmpasscode_okay", nil];
+                UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"dmpasscode_not_match", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"dmpasscode_okay", nil), nil];
                 [errorAlert show];
                 [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
                 _completion(NO);
