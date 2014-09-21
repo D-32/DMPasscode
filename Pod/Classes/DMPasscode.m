@@ -10,6 +10,7 @@
 #import "DMPasscodeInternalNavigationController.h"
 #import "DMPasscodeInternalViewController.h"
 #import "DMKeychain.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 
 #undef NSLocalizedString
 #define NSLocalizedString(key, comment) \
@@ -66,14 +67,30 @@ static NSBundle* bundle;
 - (void)setupPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion {
     _completion = completion;
     [self openPasscodeWithMode:0 viewController:viewController];
-    [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
 }
 
 - (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion {
     NSAssert([self isPasscodeSet], @"No passcode set");
     _completion = completion;
-    [self openPasscodeWithMode:1 viewController:viewController];
-    [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_to_unlock", nil)];
+    LAContext* context = [[LAContext alloc] init];
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"", nil) reply:^(BOOL success, NSError* error) {
+            if (error) {
+                if (error.code == LAErrorUserFallback) {
+                    // user fallback, show passcode
+                    [self openPasscodeWithMode:1 viewController:viewController];
+                } else {
+                    // some error, show passcode
+                    [self openPasscodeWithMode:1 viewController:viewController];
+                }
+            } else {
+                _completion(success);
+            }
+        }];
+    } else {
+        // no touch id available
+        [self openPasscodeWithMode:1 viewController:viewController];
+    }
 }
 
 - (void)removePasscode {
@@ -92,6 +109,11 @@ static NSBundle* bundle;
     _passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self];
     DMPasscodeInternalNavigationController* nc = [[DMPasscodeInternalNavigationController alloc] initWithRootViewController:_passcodeViewController];
     [viewController presentViewController:nc animated:YES completion:nil];
+    if (_mode == 0) {
+        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
+    } else if (_mode == 1) {
+        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_to_unlock", nil)];
+    }
 }
 
 #pragma mark - DMPasscodeInternalViewControllerDelegate
