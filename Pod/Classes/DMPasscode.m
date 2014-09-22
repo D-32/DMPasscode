@@ -77,7 +77,7 @@ static NSBundle* bundle;
 #ifdef __IPHONE_8_0
     LAContext* context = [[LAContext alloc] init];
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"", nil) reply:^(BOOL success, NSError* error) {
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"dmpasscode_touchid_reason", nil) reply:^(BOOL success, NSError* error) {
             if (error) {
                 if (error.code == LAErrorUserFallback) {
                     // user fallback, show passcode
