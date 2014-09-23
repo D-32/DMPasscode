@@ -79,12 +79,15 @@ static NSBundle* bundle;
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"dmpasscode_touchid_reason", nil) reply:^(BOOL success, NSError* error) {
             if (error) {
-                if (error.code == LAErrorUserFallback) {
-                    // user fallback, show passcode
-                    [self openPasscodeWithMode:1 viewController:viewController];
-                } else {
-                    // some error, show passcode
-                    [self openPasscodeWithMode:1 viewController:viewController];
+                switch (error.code) {
+                    case LAErrorAuthenticationFailed: LAErrorUserCancel: LAErrorSystemCancel:
+                        _completion(NO);
+                        break;
+                    case LAErrorUserFallback: LAErrorPasscodeNotSet: LAErrorTouchIDNotAvailable: LAErrorTouchIDNotEnrolled:
+                        [self openPasscodeWithMode:1 viewController:viewController];
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 _completion(success);
@@ -122,6 +125,12 @@ static NSBundle* bundle;
     }
 }
 
+- (void)closeAndNotify:(BOOL)success {
+    [_passcodeViewController dismissViewControllerAnimated:YES completion:^() {
+        _completion(success);
+    }];
+}
+
 #pragma mark - DMPasscodeInternalViewControllerDelegate
 - (void)enteredCode:(NSString *)code {
     if (_mode == 0) {
@@ -132,25 +141,21 @@ static NSBundle* bundle;
         } else if (_count == 1) {
             if ([code isEqualToString:_prevCode]) {
                 [[DMKeychain defaultKeychain] setObject:code forKey:KEYCHAIN_NAME];
-                [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
-                _completion(YES);
+                [self closeAndNotify:YES];
             } else {
                 UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"dmpasscode_not_match", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"dmpasscode_okay", nil), nil];
                 [errorAlert show];
-                [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
-                _completion(NO);
+                [self closeAndNotify:NO];
             }
         }
     } else if (_mode == 1) {
         if ([code isEqualToString:[[DMKeychain defaultKeychain] objectForKey:KEYCHAIN_NAME]]) {
-            [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
-            _completion(YES);
+            [self closeAndNotify:YES];
         } else {
             [_passcodeViewController setErrorMessage:[NSString stringWithFormat:NSLocalizedString(@"dmpasscode_n_left", nil), 2 - _count]];
             [_passcodeViewController reset];
             if (_count >= 2) { // max 3 attempts
-                [_passcodeViewController dismissViewControllerAnimated:YES completion:nil];
-                _completion(NO);
+                [self closeAndNotify:NO];
             }
         }
     }
