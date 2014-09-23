@@ -15,7 +15,7 @@ DMPasscode is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod "DMPasscode"
-If you're not using CocoaPods you'll find the source code files inside `Pod/Classes` and the localization files inside `Pod/Assets`.
+If you're not using CocoaPods you'll find the source code files inside `Pod/Classes`. You'll also have to add the `DMPasscode.bundle` to your project.
 
 ## Usage
 
