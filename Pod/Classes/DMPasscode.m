@@ -75,20 +75,22 @@ static NSBundle* bundle;
     LAContext* context = [[LAContext alloc] init];
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"dmpasscode_touchid_reason", nil) reply:^(BOOL success, NSError* error) {
-            if (error) {
-                switch (error.code) {
-                    case LAErrorAuthenticationFailed: LAErrorUserCancel: LAErrorSystemCancel:
-                        _completion(NO);
-                        break;
-                    case LAErrorUserFallback: LAErrorPasscodeNotSet: LAErrorTouchIDNotAvailable: LAErrorTouchIDNotEnrolled:
-                        [self openPasscodeWithMode:1 viewController:viewController];
-                        break;
-                    default:
-                        break;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    switch (error.code) {
+                        case LAErrorAuthenticationFailed: LAErrorUserCancel: LAErrorSystemCancel:
+                            _completion(NO);
+                            break;
+                        case LAErrorUserFallback: LAErrorPasscodeNotSet: LAErrorTouchIDNotAvailable: LAErrorTouchIDNotEnrolled:
+                            [self openPasscodeWithMode:1 viewController:viewController];
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    _completion(success);
                 }
-            } else {
-                _completion(success);
-            }
+            });
         }];
     } else {
         // no touch id available
