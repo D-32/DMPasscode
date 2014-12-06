@@ -24,6 +24,15 @@
     self.window.rootViewController = _rootViewController;
     [self addViews];
     [self updateViews];
+    
+    DMPasscodeConfig* config = [[DMPasscodeConfig alloc] init];
+    config.navigationBarBackgroundColor = [UIColor colorWithRed:0.10 green:0.34 blue:0.61 alpha:1.00];
+    config.navigationBarForegroundColor = [UIColor whiteColor];
+    config.fieldColor = [UIColor colorWithRed:0.10 green:0.34 blue:0.61 alpha:1.00];
+    config.emptyFieldColor = [UIColor colorWithRed:0.10 green:0.34 blue:0.61 alpha:1.00];
+    config.statusBarStyle = UIStatusBarStyleLightContent;
+    [DMPasscode setConfig:config];
+    
     return YES;
 }
 

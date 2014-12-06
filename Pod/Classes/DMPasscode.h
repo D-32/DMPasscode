@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "DMPasscodeConfig.h"
 
 typedef void (^PasscodeCompletionBlock)(BOOL);
 
@@ -46,5 +47,12 @@ typedef void (^PasscodeCompletionBlock)(BOOL);
  *  @return BOOL indicating if a passcode is set
  */
 + (BOOL)isPasscodeSet;
+
+/**
+ *  Set a configuration.
+ *
+ *  @param config configuration which should be uses.
+ */
++ (void)setConfig:(DMPasscodeConfig *)config;
 
 @end

@@ -1,0 +1,1 @@
+PODS_DMPASSCODE_DMPASSCODE_OTHER_LDFLAGS = -framework "LocalAuthentication" -framework "Security" -framework "UIKit"

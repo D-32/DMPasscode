@@ -23,7 +23,7 @@ If you project was compiled with Specta included, you have two extra methods tha
 #define EXP_SHORTHAND
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
-#include <EXPMatchers+FBSnapshotTest/EXPMatchers+FBSnapshotTest.h>
+#include <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
 #include "FBExampleView.h"
 
 SpecBegin(FBExampleView)

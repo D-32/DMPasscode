@@ -16,9 +16,11 @@
 
 @end
 
+@class DMPasscodeConfig;
+
 @interface DMPasscodeInternalViewController : UIViewController
 
-- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate;
+- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate config:(DMPasscodeConfig *)config;
 - (void)reset;
 - (void)setErrorMessage:(NSString *)errorMessage;
 - (void)setInstructions:(NSString *)instructions;

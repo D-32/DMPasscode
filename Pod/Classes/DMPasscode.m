@@ -29,12 +29,20 @@ static NSBundle* bundle;
     int _mode; // 0 = setup, 1 = input
     int _count;
     NSString* _prevCode;
+    DMPasscodeConfig* _config;
 }
 
 + (void)initialize {
     [super initialize];
     instance = [[DMPasscode alloc] init];
     bundle = [DMPasscode bundleWithName:@"DMPasscode.bundle"];
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _config = [[DMPasscodeConfig alloc] init];
+    }
+    return self;
 }
 
 + (NSBundle*)bundleWithName:(NSString*)name {
@@ -61,6 +69,10 @@ static NSBundle* bundle;
 
 + (BOOL)isPasscodeSet {
     return [instance isPasscodeSet];
+}
+
++ (void)setConfig:(DMPasscodeConfig *)config {
+    [instance setConfig:config];
 }
 
 #pragma mark - Instance methods
@@ -107,11 +119,15 @@ static NSBundle* bundle;
     return ret;
 }
 
+- (void)setConfig:(DMPasscodeConfig *)config {
+    _config = config;
+}
+
 #pragma mark - Private
 - (void)openPasscodeWithMode:(int)mode viewController:(UIViewController *)viewController {
     _mode = mode;
     _count = 0;
-    _passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self];
+    _passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self config:_config];
     DMPasscodeInternalNavigationController* nc = [[DMPasscodeInternalNavigationController alloc] initWithRootViewController:_passcodeViewController];
     [viewController presentViewController:nc animated:YES completion:nil];
     if (_mode == 0) {

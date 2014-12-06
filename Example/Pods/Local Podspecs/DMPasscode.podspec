@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "DMPasscode"
-  s.version          = "1.0.3"
+  s.version          = "1.0.5"
   s.summary          = "Passcode screen with Touch ID support"
   s.homepage         = "https://github.com/d-32/DMPasscode"
   s.license          = 'Public Domain'
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Classes'
   s.resource_bundles = { 'DMPasscode' => 'Pod/Assets/*.lproj' }
 
-  s.public_header_files = 'Pod/Classes/DMPasscode.h'
+  s.public_header_files = 'Pod/Classes/DMPasscode.h', 'Pod/Classes/DMPasscodeConfig.h'
   s.frameworks = 'UIKit', 'Security', 'LocalAuthentication'
 end

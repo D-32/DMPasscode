@@ -8,6 +8,7 @@
 
 #import "DMPasscodeInternalViewController.h"
 #import "DMPasscodeInternalField.h"
+#import "DMPasscodeConfig.h"
 
 @interface DMPasscodeInternalViewController () <UITextFieldDelegate>
 @end
@@ -18,11 +19,13 @@
     UITextField* _input;
     UILabel* _instructions;
     UILabel* _error;
+    DMPasscodeConfig* _config;
 }
 
-- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate {
+- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate config:(DMPasscodeConfig *)config {
     if (self = [super init]) {
         _delegate = delegate;
+        _config = config;
         _instructions = [[UILabel alloc] init];
         _error = [[UILabel alloc] init];
         _textFields = [[NSMutableArray alloc] init];
@@ -32,20 +35,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = _config.backgroundColor;
+    self.navigationController.navigationBar.barStyle = _config.statusBarStyle;
+    self.navigationController.navigationBar.barTintColor = _config.navigationBarBackgroundColor;
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
+    closeItem.tintColor = _config.navigationBarForegroundColor;
     self.navigationItem.leftBarButtonItem = closeItem;
     
     _instructions.frame = CGRectMake(0, 85, self.view.frame.size.width, 30);
     _instructions.font = [UIFont systemFontOfSize:16];
-    _instructions.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+    _instructions.textColor = _config.descriptionColor;
     _instructions.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_instructions];
     
     _error.frame = CGRectMake(self.view.frame.size.width / 2 - 78, 190, 156, 30);
     _error.font = [UIFont systemFontOfSize:14];
-    _error.textColor = [UIColor whiteColor];
-    _error.backgroundColor = [UIColor colorWithRed:0.63 green:0.00 blue:0.00 alpha:1.00];
+    _error.textColor = _config.errorForegroundColor;
+    _error.backgroundColor = _config.errorBackgroundColor;
     _error.textAlignment = NSTextAlignmentCenter;
     _error.layer.cornerRadius = 4;
     _error.clipsToBounds = YES;
@@ -58,7 +64,7 @@
     CGFloat x_padding = (self.view.bounds.size.width - (itemWidth * 4) - (space * 3)) / 2;
     
     for (int i = 0; i < 4; i++) {
-        DMPasscodeInternalField* field = [[DMPasscodeInternalField alloc] initWithFrame:CGRectMake(x_padding + ((itemWidth + space) * i), y_padding, itemWidth, itemWidth)];
+        DMPasscodeInternalField* field = [[DMPasscodeInternalField alloc] initWithFrame:CGRectMake(x_padding + ((itemWidth + space) * i), y_padding, itemWidth, itemWidth) config:_config];
         [self.view addSubview:field];
         [_textFields addObject:field];
     }
