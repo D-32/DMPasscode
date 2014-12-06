@@ -82,15 +82,16 @@
 }
 
 - (void)editingChanged:(UITextField *)sender {
-    for (DMPasscodeInternalField* field in _textFields) {
-        field.text = @"";
-    }
     for (int i = 0; i < sender.text.length; i++) {
         DMPasscodeInternalField* field = [_textFields objectAtIndex:i];
         NSRange range;
         range.length = 1;
         range.location = i;
         field.text = [sender.text substringWithRange:range];
+    }
+    for (int i = (int)sender.text.length; i < 4; i++) {
+        DMPasscodeInternalField* field = [_textFields objectAtIndex:i];
+        field.text = @"";
     }
     
     NSString* code = sender.text;
