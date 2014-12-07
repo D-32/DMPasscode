@@ -8,7 +8,7 @@
 A simple passcode screen that can be displayed manually. If Touch ID is available the user can skip the screen and instead use his fingerprint to unlock.  
 Can be easily customized to fit your design.
 
-![image](http://46.105.26.1/uploads/passcode.png)
+![image](http://46.105.26.1/uploads/passcode2.png)
 
 ## Installation
 
