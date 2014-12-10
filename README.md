@@ -5,8 +5,8 @@
 ![License](https://img.shields.io/cocoapods/l/DMPasscode.svg?style=flat)
 [![twitter: @dylan36032](http://img.shields.io/badge/twitter-%40dylan36032-blue.svg?style=flat)](https://twitter.com/dylan36032)
 
-A simple passcode screen that can be displayed manually. If Touch ID is available the user can skip the screen and instead use his fingerprint to unlock.  
-Can be easily customized to fit your design.
+A simple passcode screen that can be displayed manually. If Touch ID is available the user can skip the screen and instead use his fingerprint to unlock.
+Can easily be customised to fit your design.
 
 ![image](http://46.105.26.1/uploads/passcode2.png)
 
