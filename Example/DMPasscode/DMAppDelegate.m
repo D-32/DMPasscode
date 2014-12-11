@@ -14,7 +14,7 @@
     UIButton* _setupButton;
     UIButton* _checkButton;
     UIButton* _removeButton;
-    BOOL showingPasscode;
+    BOOL _showingPasscode;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -92,9 +92,9 @@
     _removeButton.enabled = passcodeSet;
 }
 
--(void)applicationDidBecomeActive:(UIApplication *)application{
-    if ([DMPasscode isPasscodeSet]&&!showingPasscode) {
-        showingPasscode = YES;
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    if ([DMPasscode isPasscodeSet] && !_showingPasscode) {
+        _showingPasscode = YES;
         [DMPasscode showPasscodeInViewController:self.window.rootViewController completion:^(BOOL success) {
             if (success) {
                 NSLog(@"Win");
@@ -106,7 +106,7 @@
 }
 
 -(void)applicationWillEnterForeground:(UIApplication *)application{
-    showingPasscode = NO;
+    _showingPasscode = NO;
 }
 
 @end
