@@ -90,10 +90,15 @@ static NSBundle* bundle;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     switch (error.code) {
-                        case LAErrorAuthenticationFailed: LAErrorUserCancel: LAErrorSystemCancel:
+                        case LAErrorAuthenticationFailed:
+                        case LAErrorUserCancel:
+                        case LAErrorSystemCancel:
                             _completion(NO);
                             break;
-                        case LAErrorUserFallback: LAErrorPasscodeNotSet: LAErrorTouchIDNotAvailable: LAErrorTouchIDNotEnrolled:
+                        case LAErrorUserFallback:
+                        case LAErrorPasscodeNotSet:
+                        case LAErrorTouchIDNotAvailable:
+                        case LAErrorTouchIDNotEnrolled:
                             [self openPasscodeWithMode:1 viewController:viewController];
                             break;
                         default:

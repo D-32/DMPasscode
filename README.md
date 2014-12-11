@@ -43,7 +43,11 @@ Following properties are available to customise the passcode screen:
 	statusBarStyle
 	fieldColor
 	emptyFieldColor
+    errorFont
 	errorBackgroundColor
 	errorForegroundColor
 	descriptionColor
+    inputKeyboardAppearance
+    instructionsFont
+
 
