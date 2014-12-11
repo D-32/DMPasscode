@@ -61,4 +61,22 @@
  */
 @property (nonatomic, strong) UIColor* descriptionColor;
 
+/**
+ *  The appearance of the input keyboard.
+ */
+
+@property (nonatomic) UIKeyboardAppearance inputKeyboardAppearance;
+
+/**
+ *  The font used for instructions.
+ */
+
+@property (nonatomic) UIFont *instructionsFont;
+
+/**
+ *  The font used for Error.
+ */
+
+@property (nonatomic) UIFont *errorFont;
+
 @end

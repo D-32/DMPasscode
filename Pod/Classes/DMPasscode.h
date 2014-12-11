@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "DMPasscodeConfig.h"
 
-typedef void (^PasscodeCompletionBlock)(BOOL);
+typedef void (^PasscodeCompletionBlock)(BOOL success);
 
 /**
  *  The passcode screen has to be manually opened. You decide when it should be presented.

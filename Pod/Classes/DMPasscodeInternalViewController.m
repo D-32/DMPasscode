@@ -36,20 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = _config.backgroundColor;
-    self.navigationController.navigationBar.barStyle = _config.statusBarStyle;
+    self.navigationController.navigationBar.barStyle = (UIBarStyle)_config.statusBarStyle;
     self.navigationController.navigationBar.barTintColor = _config.navigationBarBackgroundColor;
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
     closeItem.tintColor = _config.navigationBarForegroundColor;
     self.navigationItem.leftBarButtonItem = closeItem;
     
     _instructions.frame = CGRectMake(0, 85, self.view.frame.size.width, 30);
-    _instructions.font = [UIFont systemFontOfSize:16];
+    _instructions.font = _config.instructionsFont;
     _instructions.textColor = _config.descriptionColor;
     _instructions.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_instructions];
     
     _error.frame = CGRectMake(self.view.frame.size.width / 2 - 78, 190, 156, 30);
-    _error.font = [UIFont systemFontOfSize:14];
+    _error.font = _config.errorFont;
     _error.textColor = _config.errorForegroundColor;
     _error.backgroundColor = _config.errorBackgroundColor;
     _error.textAlignment = NSTextAlignmentCenter;
@@ -74,6 +74,7 @@
     [_input setDelegate:self];
     [_input addTarget:self action:@selector(editingChanged:) forControlEvents:UIControlEventEditingChanged];
     _input.keyboardType = UIKeyboardTypeNumberPad;
+    _input.keyboardAppearance = _config.inputKeyboardAppearance;
     [self.view addSubview:_input];
     [_input becomeFirstResponder];
 }
