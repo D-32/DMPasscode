@@ -36,11 +36,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = _config.backgroundColor;
-    self.navigationController.navigationBar.barStyle = (UIBarStyle)_config.statusBarStyle;
     self.navigationController.navigationBar.barTintColor = _config.navigationBarBackgroundColor;
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
     closeItem.tintColor = _config.navigationBarForegroundColor;
     self.navigationItem.leftBarButtonItem = closeItem;
+    self.navigationController.navigationBar.barStyle = (UIBarStyle)_config.statusBarStyle;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName :_config.navigationBarFont,
+                                                                    NSForegroundColorAttributeName: _config.navigationBarTitleColor};
+    self.title = _config.navigationBarTitle;
     
     _instructions.frame = CGRectMake(0, 85, self.view.frame.size.width, 30);
     _instructions.font = _config.instructionsFont;
@@ -108,6 +111,7 @@
 }
 
 - (void)close:(id)sender {
+    [_input resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
     [_delegate canceled];
 }

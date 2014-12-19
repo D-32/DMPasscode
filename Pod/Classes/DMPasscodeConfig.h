@@ -69,11 +69,26 @@
 /**
  *  The font used for instructions.
  */
-@property (nonatomic) UIFont *instructionsFont;
+@property (nonatomic,strong) UIFont *instructionsFont;
 
 /**
  *  The font used for Error.
  */
-@property (nonatomic) UIFont *errorFont;
+@property (nonatomic,strong) UIFont *errorFont;
+
+/**
+ *  The Navigation Bar Title.
+ */
+@property (nonatomic, strong) NSString * navigationBarTitle;
+
+/**
+ *  The font used for the Navigation Bar.
+ */
+@property (nonatomic, strong) UIFont * navigationBarFont;
+
+/**
+ *  The color used for the Navigation Bar Title.
+ */
+@property (nonatomic, strong) UIColor * navigationBarTitleColor;
 
 @end
