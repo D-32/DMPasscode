@@ -49,5 +49,8 @@ Following properties are available to customise the passcode screen:
 	descriptionColor
     inputKeyboardAppearance
     instructionsFont
+    navigationBarTitle
+    navigationBarFont
+    navigationBarTitleColor
 
 

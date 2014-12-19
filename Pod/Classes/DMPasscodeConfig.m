@@ -25,6 +25,9 @@
         self.inputKeyboardAppearance = UIKeyboardAppearanceDefault;
         self.errorFont = [UIFont systemFontOfSize:14];
         self.instructionsFont = [UIFont systemFontOfSize:16];
+        self.navigationBarTitle = @"";
+        self.navigationBarFont = [UIFont systemFontOfSize:16];
+        self.navigationBarTitleColor = [UIColor darkTextColor];
     }
     return self;
 }
