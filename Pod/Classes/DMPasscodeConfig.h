@@ -91,4 +91,39 @@
  */
 @property (nonatomic, strong) UIColor * navigationBarTitleColor;
 
+/**
+ *  The new code Title.
+ */
+@property (nonatomic, strong) NSString* enterNewCodeTitle;
+
+/**
+ *  The unlock code Title.
+ */
+@property (nonatomic, strong) NSString* enterCoodeToUnlockTitle;
+
+/**
+ *  The repeat code Title.
+ */
+@property (nonatomic, strong) NSString* repeatCodeTitle;
+
+/**
+ *  The no match Title.
+ */
+@property (nonatomic, strong) NSString* noMatchTitle;
+
+/**
+ *  The okay Title.
+ */
+@property (nonatomic, strong) NSString* okayTitle;
+
+/**
+ *  The n attempts left Title.
+ */
+@property (nonatomic, strong) NSString* leftAttemptsTitle;
+
+/**
+ *  The touch id reason Title.
+ */
+@property (nonatomic, strong) NSString* touchIdReasonTitle;
+
 @end

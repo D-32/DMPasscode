@@ -9,6 +9,13 @@
 #import "DMPasscodeInternalViewController.h"
 #import "DMPasscodeInternalField.h"
 #import "DMPasscodeConfig.h"
+#import "DMPasscode.h"
+
+@interface DMPasscode ()
+
++ (void)setShowingPasscode:(BOOL)showing;
+
+@end
 
 @interface DMPasscodeInternalViewController () <UITextFieldDelegate>
 @end
@@ -20,26 +27,50 @@
     UILabel* _instructions;
     UILabel* _error;
     DMPasscodeConfig* _config;
+    DMPasscodeMode _mode;
 }
 
-- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate config:(DMPasscodeConfig *)config {
+- (id)initWithDelegate:(id<DMPasscodeInternalViewControllerDelegate>)delegate config:(DMPasscodeConfig *)config mode:(DMPasscodeMode)mode {
     if (self = [super init]) {
         _delegate = delegate;
         _config = config;
         _instructions = [[UILabel alloc] init];
         _error = [[UILabel alloc] init];
         _textFields = [[NSMutableArray alloc] init];
+        _mode = mode;
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (_mode == DMPM_input || _mode == DMPM_lockScreen) {
+        [DMPasscode setShowingPasscode:YES];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if (_mode == DMPM_input || _mode == DMPM_lockScreen) {
+        [DMPasscode setShowingPasscode:NO];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = _config.backgroundColor;
     self.navigationController.navigationBar.barTintColor = _config.navigationBarBackgroundColor;
-    UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
-    closeItem.tintColor = _config.navigationBarForegroundColor;
-    self.navigationItem.leftBarButtonItem = closeItem;
+    
+    if (_mode != DMPM_lockScreen) {
+        UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
+        closeItem.tintColor = _config.navigationBarForegroundColor;
+        self.navigationItem.leftBarButtonItem = closeItem;
+    }
+    
     self.navigationController.navigationBar.barStyle = (UIBarStyle)_config.statusBarStyle;
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName :_config.navigationBarFont,
                                                                     NSForegroundColorAttributeName: _config.navigationBarTitleColor};

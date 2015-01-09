@@ -14,13 +14,11 @@
     UIButton* _setupButton;
     UIButton* _checkButton;
     UIButton* _removeButton;
-    BOOL _showingPasscode;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
     _rootViewController = [[UIViewController alloc] init];
     self.window.rootViewController = _rootViewController;
     [self addViews];
@@ -37,13 +35,27 @@
     config.statusBarStyle = UIStatusBarStyleLightContent;
     [DMPasscode setConfig:config];
     */
-     
+    
+    DMPasscodeConfig* config = [[DMPasscodeConfig alloc] init];
+    config.enterNewCodeTitle = NSLocalizedString(@"dmpasscode_enter_new_code", @"");
+    config.enterCoodeToUnlockTitle = NSLocalizedString(@"dmpasscode_enter_to_unlock", @"");
+    config.repeatCodeTitle = NSLocalizedString(@"dmpasscode_repeat", @"");
+    config.noMatchTitle = NSLocalizedString(@"dmpasscode_not_match", @"");
+    config.okayTitle = NSLocalizedString(@"dmpasscode_okay", @"");
+    config.leftAttemptsTitle = NSLocalizedString(@"dmpasscode_n_left", @"");
+    config.touchIdReasonTitle = NSLocalizedString(@"dmpasscode_touchid_reason", @"");
+    [DMPasscode setConfig:config];
+    
+    [self.window makeKeyAndVisible];
+    
+    [self applicationWillResignActive:application];
+    
     return YES;
 }
 
 - (void)addViews {
     _setupButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, _rootViewController.view.frame.size.width, 50)];
-    [_setupButton setTitle:@"Setup" forState:UIControlStateNormal];
+    [_setupButton setTitle:NSLocalizedString(@"setup", @"") forState:UIControlStateNormal];
     [_setupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_setupButton addTarget:self action:@selector(actionSetup:) forControlEvents:UIControlEventTouchUpInside];
     [_rootViewController.view addSubview:_setupButton];
@@ -92,21 +104,20 @@
     _removeButton.enabled = passcodeSet;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    if ([DMPasscode isPasscodeSet] && !_showingPasscode) {
-        _showingPasscode = YES;
-        [DMPasscode showPasscodeInViewController:self.window.rootViewController completion:^(BOOL success) {
-            if (success) {
-                NSLog(@"Win");
-            }else{
-                NSLog(@"Loss");
-            }
-        }];
-    }
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self applicationWillResignActive:application];
 }
 
--(void)applicationWillEnterForeground:(UIApplication *)application{
-    _showingPasscode = NO;
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [DMPasscode lockScreenWithCompletion:^(BOOL success) {
+        if (success) {
+            NSLog(@"Win");
+        }else{
+            NSLog(@"Loss");
+        }
+    }];
 }
 
 @end

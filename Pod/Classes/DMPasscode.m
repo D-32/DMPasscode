@@ -15,21 +15,20 @@
 #import <LocalAuthentication/LocalAuthentication.h>
 #endif
 
-#undef NSLocalizedString
-#define NSLocalizedString(key, comment) \
-[bundle localizedStringForKey:(key) value:@"" table:@"DMPasscodeLocalisation"]
-
 static DMPasscode* instance;
 static const NSString* KEYCHAIN_NAME = @"passcode";
 static NSBundle* bundle;
 
 @interface DMPasscode () <DMPasscodeInternalViewControllerDelegate>
+
+@property BOOL showingPasscode;
+@property DMPasscodeInternalViewController* passcodeViewController;
+
 @end
 
 @implementation DMPasscode {
     PasscodeCompletionBlock _completion;
-    DMPasscodeInternalViewController* _passcodeViewController;
-    int _mode; // 0 = setup, 1 = input
+    DMPasscodeMode _mode;
     int _count;
     NSString* _prevCode;
     DMPasscodeConfig* _config;
@@ -66,6 +65,21 @@ static NSBundle* bundle;
     [instance showPasscodeInViewController:viewController completion:completion];
 }
 
++ (void)lockScreenWithCompletion:(PasscodeCompletionBlock)completion
+{
+    if (![DMPasscode isPasscodeSet])
+        return;
+    
+    if ([DMPasscode isShowingPasscode]) {
+        [instance.passcodeViewController dismissViewControllerAnimated:NO completion:Nil];
+    }
+    
+    UIWindow* main_window = [[UIApplication sharedApplication] keyWindow];
+    [main_window.rootViewController.view endEditing:YES];
+    
+    [instance showPasscodeInViewController:main_window.rootViewController completion:completion animated:NO mode:DMPM_lockScreen];
+}
+
 + (void)removePasscode {
     [instance removePasscode];
 }
@@ -78,18 +92,38 @@ static NSBundle* bundle;
     [instance setConfig:config];
 }
 
++ (BOOL)isShowingPasscode
+{
+    return instance.showingPasscode;
+}
+
++ (void)setShowingPasscode:(BOOL)showing
+{
+    instance.showingPasscode = showing;
+}
+
 #pragma mark - Instance methods
 - (void)setupPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion {
     _completion = completion;
-    [self openPasscodeWithMode:0 viewController:viewController];
+    [self openPasscodeWithMode:DMPM_setup viewController:viewController];
 }
 
-- (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion {
+- (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion
+{
+    [self showPasscodeInViewController:viewController completion:completion animated:YES];
+}
+
+- (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion animated:(BOOL)animated
+{
+    [self showPasscodeInViewController:viewController completion:completion animated:animated mode:DMPM_input];
+}
+
+- (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion animated:(BOOL)animated mode:(DMPasscodeMode)mode{
     NSAssert([self isPasscodeSet], @"No passcode set");
     _completion = completion;
     LAContext* context = [[LAContext alloc] init];
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"dmpasscode_touchid_reason", nil) reply:^(BOOL success, NSError* error) {
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:_config.touchIdReasonTitle reply:^(BOOL success, NSError* error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     switch (error.code) {
@@ -102,7 +136,7 @@ static NSBundle* bundle;
                         case LAErrorTouchIDNotEnrolled:
                         case LAErrorTouchIDNotAvailable:
                         case LAErrorUserFallback:
-                            [self openPasscodeWithMode:1 viewController:viewController];
+                            [self openPasscodeWithMode:mode viewController:viewController animated:animated];
                             break;
                     }
                 } else {
@@ -112,7 +146,7 @@ static NSBundle* bundle;
         }];
     } else {
         // no touch id available
-        [self openPasscodeWithMode:1 viewController:viewController];
+        [self openPasscodeWithMode:mode viewController:viewController animated:animated];
     }
 }
 
@@ -130,48 +164,62 @@ static NSBundle* bundle;
 }
 
 #pragma mark - Private
-- (void)openPasscodeWithMode:(int)mode viewController:(UIViewController *)viewController {
+- (void)openPasscodeWithMode:(DMPasscodeMode)mode viewController:(UIViewController *)viewController
+{
+    [self openPasscodeWithMode:mode viewController:viewController animated:YES];
+}
+
+- (void)openPasscodeWithMode:(DMPasscodeMode)mode viewController:(UIViewController *)viewController animated:(BOOL)animated {
     _mode = mode;
     _count = 0;
-    _passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self config:_config];
-    DMPasscodeInternalNavigationController* nc = [[DMPasscodeInternalNavigationController alloc] initWithRootViewController:_passcodeViewController];
-    [viewController presentViewController:nc animated:YES completion:nil];
-    if (_mode == 0) {
-        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
-    } else if (_mode == 1) {
-        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_to_unlock", nil)];
+    
+    self.passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self config:_config mode:_mode];
+    DMPasscodeInternalNavigationController* nc = [[DMPasscodeInternalNavigationController alloc] initWithRootViewController:self.passcodeViewController];
+        
+    [viewController presentViewController:nc
+                                 animated:animated
+                               completion:^{
+                               }];
+    if (_mode == DMPM_setup) {
+        [self.passcodeViewController setInstructions:_config.enterNewCodeTitle];
+    } else if (_mode == DMPM_input || _mode == DMPM_lockScreen) {
+        [self.passcodeViewController setInstructions:_config.enterCoodeToUnlockTitle];
     }
 }
 
 - (void)closeAndNotify:(BOOL)success {
-    [_passcodeViewController dismissViewControllerAnimated:YES completion:^() {
+    [self.passcodeViewController dismissViewControllerAnimated:YES completion:^() {
         _completion(success);
     }];
 }
 
 #pragma mark - DMPasscodeInternalViewControllerDelegate
 - (void)enteredCode:(NSString *)code {
-    if (_mode == 0) {
+    if (_mode == DMPM_setup) {
         if (_count == 0) {
             _prevCode = code;
-            [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_repeat", nil)];
-            [_passcodeViewController reset];
+            [self.passcodeViewController setInstructions:_config.repeatCodeTitle];
+            [self.passcodeViewController reset];
         } else if (_count == 1) {
             if ([code isEqualToString:_prevCode]) {
                 [[DMKeychain defaultKeychain] setObject:code forKey:KEYCHAIN_NAME];
                 [self closeAndNotify:YES];
             } else {
-                UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"dmpasscode_not_match", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"dmpasscode_okay", nil), nil];
+                UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:_config.noMatchTitle
+                                                                     message:nil
+                                                                    delegate:nil
+                                                           cancelButtonTitle:nil
+                                                           otherButtonTitles:_config.okayTitle, nil];
                 [errorAlert show];
                 [self closeAndNotify:NO];
             }
         }
-    } else if (_mode == 1) {
+    } else if (_mode == DMPM_input || _mode == DMPM_lockScreen) {
         if ([code isEqualToString:[[DMKeychain defaultKeychain] objectForKey:KEYCHAIN_NAME]]) {
             [self closeAndNotify:YES];
         } else {
-            [_passcodeViewController setErrorMessage:[NSString stringWithFormat:NSLocalizedString(@"dmpasscode_n_left", nil), 2 - _count]];
-            [_passcodeViewController reset];
+            [self.passcodeViewController setErrorMessage:[NSString stringWithFormat:_config.leftAttemptsTitle, 2 - _count]];
+            [self.passcodeViewController reset];
             if (_count >= 2) { // max 3 attempts
                 [self closeAndNotify:NO];
             }
