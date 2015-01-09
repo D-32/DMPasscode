@@ -8,7 +8,19 @@
 
 #import "DMPasscodeConfig.h"
 
+#define NSLocalizedStringPasscode(key, comment) \
+[[DMPasscodeConfig bundleWithName:@"DMPasscode.bundle"] localizedStringForKey:(key) value:@"" table:@"DMPasscodeLocalisation"]
+
 @implementation DMPasscodeConfig
+
++ (NSBundle*)bundleWithName:(NSString*)name {
+    NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
+    NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:name];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:frameworkBundlePath]){
+        return [NSBundle bundleWithPath:frameworkBundlePath];
+    }
+    return nil;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -28,6 +40,13 @@
         self.navigationBarTitle = @"";
         self.navigationBarFont = [UIFont systemFontOfSize:16];
         self.navigationBarTitleColor = [UIColor darkTextColor];
+        self.enterNewCodeTitle = NSLocalizedStringPasscode(@"dmpasscode_enter_new_code", @"");
+        self.enterCoodeToUnlockTitle = NSLocalizedStringPasscode(@"dmpasscode_enter_to_unlock", @"");
+        self.repeatCodeTitle = NSLocalizedStringPasscode(@"dmpasscode_repeat", @"");
+        self.noMatchTitle = NSLocalizedStringPasscode(@"dmpasscode_not_match", @"");
+        self.okayTitle = NSLocalizedStringPasscode(@"dmpasscode_okay", @"");
+        self.leftAttemptsTitle = NSLocalizedStringPasscode(@"dmpasscode_n_left", @"");
+        self.touchIdReasonTitle = NSLocalizedStringPasscode(@"dmpasscode_touchid_reason", @"");
     }
     return self;
 }

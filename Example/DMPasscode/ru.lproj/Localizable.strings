@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  DMPasscode
+
+  Created by Alex on 09.01.15.
+  Copyright (c) 2015 Dylan Marriott. All rights reserved.
+*/
+
+"dmpasscode_enter_new_code" = "Введите новый код";
+"dmpasscode_enter_to_unlock" = "Введите код, что бы разблокировать";
+"dmpasscode_repeat" = "Повторите код";
+"dmpasscode_not_match" = "Коды не совпали, пожалуйста, попробуйте еще раз.";
+"dmpasscode_okay" = "Ок";
+"dmpasscode_n_left" = "Осталось %i попыток";
+"dmpasscode_touchid_reason" = "Авторизуйтесь, что бы получить доступ";
+
+"setup" = "Настройка";

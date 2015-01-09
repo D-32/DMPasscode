@@ -36,6 +36,8 @@ typedef void (^PasscodeCompletionBlock)(BOOL success);
  */
 + (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion;
 
++ (void)lockScreenWithCompletion:(PasscodeCompletionBlock)completion;
+
 /**
  *  Remove the passcode from the keychain.
  */
@@ -54,5 +56,12 @@ typedef void (^PasscodeCompletionBlock)(BOOL success);
  *  @param config configuration which should be uses.
  */
 + (void)setConfig:(DMPasscodeConfig *)config;
+
+/**
+ *  Check if a input is already set.
+ *
+ *  @return BOOL indicating if a passcode is set
+ */
++ (BOOL)isShowingPasscode;
 
 @end
