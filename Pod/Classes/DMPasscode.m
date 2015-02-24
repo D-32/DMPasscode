@@ -161,9 +161,11 @@ static NSBundle* bundle;
                 [[DMKeychain defaultKeychain] setObject:code forKey:KEYCHAIN_NAME];
                 [self closeAndNotify:YES];
             } else {
-                UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"dmpasscode_not_match", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"dmpasscode_okay", nil), nil];
-                [errorAlert show];
-                [self closeAndNotify:NO];
+                [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
+                [_passcodeViewController setErrorMessage:NSLocalizedString(@"dmpasscode_not_match", nil)];
+                [_passcodeViewController reset];
+                _count = 0;
+                return;
             }
         }
     } else if (_mode == 1) {

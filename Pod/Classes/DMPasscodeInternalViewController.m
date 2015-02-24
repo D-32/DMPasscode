@@ -51,7 +51,7 @@
     _instructions.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_instructions];
     
-    _error.frame = CGRectMake(self.view.frame.size.width / 2 - 78, 190, 156, 30);
+    _error.frame = CGRectMake(self.view.frame.size.width / 2 - 148, 190, 296, 30);
     _error.font = _config.errorFont;
     _error.textColor = _config.errorForegroundColor;
     _error.backgroundColor = _config.errorBackgroundColor;
