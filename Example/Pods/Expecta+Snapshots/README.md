@@ -1,5 +1,5 @@
 Expecta Matchers for FBSnapshotTestCase
-==============================
+=======================================
 
 [Expecta](https://github.com/specta/expecta) matchers for [ios-snapshot-test-case](https://github.com/facebook/ios-snapshot-test-case).
 
@@ -7,10 +7,10 @@ Expecta Matchers for FBSnapshotTestCase
 
 ### Usage
 
-Add `EXPMatchers+FBSnapshotTest` to your Podfile, the latest `FBSnapshotTestCase` will come in as a dependency.
+Add `Expecta+Snapshots` to your Podfile, the latest `FBSnapshotTestCase` will come in as a dependency.
 
 ``` ruby
-pod 'Expecta+Snapshots', '~> 1.0'
+pod 'Expecta+Snapshots'
 ```
 
 ### App setup
@@ -78,7 +78,7 @@ A complete project can be found in [FBSnapshotTestCaseDemo](FBSnapshotTestCaseDe
 
 Notably, take a look at [FBSnapshotTestCaseDemoSpecs.m](FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoSpecs.m) for a complete example, which is an expanded Specta version version of [FBSnapshotTestCaseDemoTests.m](https://github.com/facebook/ios-snapshot-test-case/blob/master/FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoTests.m).
 
-Finally you can consult the tests for [ARTiledImageView](https://github.com/dblock/ARTiledImageView/tree/master/Demo/DemoTests) or [NAMapKit](https://github.com/neilang/NAMapKit/tree/master/Demo/DemoTests).
+Finally you can consult the tests for [ARTiledImageView](https://github.com/dblock/ARTiledImageView/tree/master/IntegrationTests) or [NAMapKit](https://github.com/neilang/NAMapKit/tree/master/Demo/DemoTests).
 
 ### License
 

@@ -113,8 +113,16 @@ void setGlobalReferenceImageDir(char *reference) {
 NSString *sanitizedTestPath();
 
 NSString *sanitizedTestPath(){
-    SPTSpec *compiledExample = [[NSThread currentThread] threadDictionary][@"SPTCurrentSpec"];
-    NSString *name = [[[[compiledExample.name componentsSeparatedByString:@" test_"] lastObject] stringByReplacingOccurrencesOfString:@"__" withString:@"_"] stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    id compiledExample = [[NSThread currentThread] threadDictionary][@"SPTCurrentSpec"]; // SPTSpec
+    NSString *name;
+    if ([compiledExample respondsToSelector:@selector(name)]) {
+        // Specta 0.3 syntax
+        name = [compiledExample performSelector:@selector(name)];
+    } else if ([compiledExample respondsToSelector:@selector(fileName)]) {
+        // Specta 0.2 syntax
+        name = [compiledExample performSelector:@selector(fileName)];
+    }
+    name = [[[[name componentsSeparatedByString:@" test_"] lastObject] stringByReplacingOccurrencesOfString:@"__" withString:@"_"] stringByReplacingOccurrencesOfString:@"]" withString:@""];
     return name;
 }
 

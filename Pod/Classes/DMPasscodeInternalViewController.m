@@ -49,9 +49,10 @@
     _instructions.font = _config.instructionsFont;
     _instructions.textColor = _config.descriptionColor;
     _instructions.textAlignment = NSTextAlignmentCenter;
+    _instructions.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_instructions];
     
-    _error.frame = CGRectMake(self.view.frame.size.width / 2 - 148, 190, 296, 30);
+    _error.frame = CGRectMake(0, 190, 0, 0); // size set when text is set
     _error.font = _config.errorFont;
     _error.textColor = _config.errorForegroundColor;
     _error.backgroundColor = _config.errorBackgroundColor;
@@ -59,18 +60,24 @@
     _error.layer.cornerRadius = 4;
     _error.clipsToBounds = YES;
     _error.alpha = 0;
+    _error.numberOfLines = 0;
+    _error.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:_error];
     
     CGFloat y_padding = 140;
     CGFloat itemWidth = 24;
-    int space = 20;
-    CGFloat x_padding = (self.view.bounds.size.width - (itemWidth * 4) - (space * 3)) / 2;
+    CGFloat space = 20;
+    CGFloat totalWidth = (itemWidth * 4) + (space * 3);
+    CGFloat x_padding = (self.view.bounds.size.width - totalWidth) / 2;
     
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(x_padding, y_padding, totalWidth, itemWidth)];
+    container.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     for (int i = 0; i < 4; i++) {
-        DMPasscodeInternalField* field = [[DMPasscodeInternalField alloc] initWithFrame:CGRectMake(x_padding + ((itemWidth + space) * i), y_padding, itemWidth, itemWidth) config:_config];
-        [self.view addSubview:field];
+        DMPasscodeInternalField* field = [[DMPasscodeInternalField alloc] initWithFrame:CGRectMake(((itemWidth + space) * i), 0, itemWidth, itemWidth) config:_config];
+        [container addSubview:field];
         [_textFields addObject:field];
     }
+    [self.view addSubview:container];
     
  
     _input = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -126,6 +133,11 @@
 - (void)setErrorMessage:(NSString *)errorMessage {
     _error.text = errorMessage;
     _error.alpha = errorMessage.length > 0 ? 1.0f : 0.0f;
+    
+    CGSize size = [_error.text sizeWithAttributes:@{NSFontAttributeName: _error.font}];
+    size.width += 28;
+    size.height += 28;
+    _error.frame = CGRectMake(self.view.frame.size.width / 2 - size.width / 2, _error.frame.origin.y, size.width, size.height);
 }
 
 - (void)setInstructions:(NSString *)instructions {
