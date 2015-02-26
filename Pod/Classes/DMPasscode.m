@@ -155,6 +155,7 @@ static NSBundle* bundle;
         if (_count == 0) {
             _prevCode = code;
             [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_repeat", nil)];
+            [_passcodeViewController setErrorMessage:@""];
             [_passcodeViewController reset];
         } else if (_count == 1) {
             if ([code isEqualToString:_prevCode]) {
