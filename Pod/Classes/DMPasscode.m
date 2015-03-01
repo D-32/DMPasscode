@@ -22,6 +22,7 @@
 static DMPasscode* instance;
 static const NSString* KEYCHAIN_NAME = @"passcode";
 static NSBundle* bundle;
+NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
 
 @interface DMPasscode () <DMPasscodeInternalViewControllerDelegate>
 @end
@@ -96,7 +97,7 @@ static NSBundle* bundle;
                         case LAErrorUserCancel:
                         case LAErrorSystemCancel:
                         case LAErrorAuthenticationFailed:
-                            _completion(NO);
+                            _completion(NO, error);
                             break;
                         case LAErrorPasscodeNotSet:
                         case LAErrorTouchIDNotEnrolled:
@@ -106,7 +107,7 @@ static NSBundle* bundle;
                             break;
                     }
                 } else {
-                    _completion(success);
+                    _completion(success, nil);
                 }
             });
         }];
@@ -143,9 +144,9 @@ static NSBundle* bundle;
     }
 }
 
-- (void)closeAndNotify:(BOOL)success {
+- (void)closeAndNotify:(BOOL)success withError:(NSError *)error {
     [_passcodeViewController dismissViewControllerAnimated:YES completion:^() {
-        _completion(success);
+        _completion(success, error);
     }];
 }
 
@@ -160,7 +161,7 @@ static NSBundle* bundle;
         } else if (_count == 1) {
             if ([code isEqualToString:_prevCode]) {
                 [[DMKeychain defaultKeychain] setObject:code forKey:KEYCHAIN_NAME];
-                [self closeAndNotify:YES];
+                [self closeAndNotify:YES withError:nil];
             } else {
                 [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
                 [_passcodeViewController setErrorMessage:NSLocalizedString(@"dmpasscode_not_match", nil)];
@@ -171,12 +172,13 @@ static NSBundle* bundle;
         }
     } else if (_mode == 1) {
         if ([code isEqualToString:[[DMKeychain defaultKeychain] objectForKey:KEYCHAIN_NAME]]) {
-            [self closeAndNotify:YES];
+            [self closeAndNotify:YES withError:nil];
         } else {
             [_passcodeViewController setErrorMessage:[NSString stringWithFormat:NSLocalizedString(@"dmpasscode_n_left", nil), 2 - _count]];
             [_passcodeViewController reset];
             if (_count >= 2) { // max 3 attempts
-                [self closeAndNotify:NO];
+                NSError *errorMatchingPins = [NSError errorWithDomain:DMUnlockErrorDomain code:DMErrorUnlocking userInfo:nil];
+                [self closeAndNotify:NO withError:errorMatchingPins];
             }
         }
     }
@@ -184,7 +186,7 @@ static NSBundle* bundle;
 }
 
 - (void)canceled {
-    _completion(NO);
+    _completion(NO, nil);
 }
 
 @end
