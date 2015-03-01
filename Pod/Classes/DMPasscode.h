@@ -10,7 +10,12 @@
 #import <UIKit/UIKit.h>
 #import "DMPasscodeConfig.h"
 
-typedef void (^PasscodeCompletionBlock)(BOOL success);
+typedef void (^PasscodeCompletionBlock)(BOOL success, NSError *error);
+
+typedef NS_ENUM(NSInteger, DMUnlockErrorCodes)
+{
+    DMErrorUnlocking = -1,
+};
 
 /**
  *  The passcode screen has to be manually opened. You decide when it should be presented.
@@ -24,7 +29,7 @@ typedef void (^PasscodeCompletionBlock)(BOOL success);
  *  Setup a new passcode.
  *
  *  @param viewController The view controller in which the passcode screen will be presented
- *  @param completion     The completion block with a BOOL to inidcate if the setup was successfull
+ *  @param completion     The completion block with a BOOL to inidcate if authentication was successful (and NSError if not)
  */
 + (void)setupPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion;
 
@@ -32,7 +37,7 @@ typedef void (^PasscodeCompletionBlock)(BOOL success);
  *  Authenticate the user.
  *
  *  @param viewController The view controller in which the passcode screen will be presented
- *  @param completion     The completion block with a BOOL to inidcate if the authentication was successfull
+ *  @param completion     The completion block with a BOOL to inidcate if the authentication was successful (and NSError if not)
  */
 + (void)showPasscodeInViewController:(UIViewController *)viewController completion:(PasscodeCompletionBlock)completion;
 

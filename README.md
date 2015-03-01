@@ -30,7 +30,15 @@ The class `DMPasscode` contains following methods:
 	+ (void)removePasscode;
 	+ (BOOL)isPasscodeSet;
 	+ (void)setConfig:(DMPasscodeConfig *)config;
- 
+
+#### PasscodeCompletionBlock(BOOL success, NSError *error)
+
+PasscodeCompletionBlock is a custom type of block provided to `DMPasscode` that returns values in the form of two parameters, a `BOOL success` and a `NSError *error`.
+If `success`, then the user has successfully either setup their passcode, or successfully unlocked with their passcode.
+
+If not `success`, then the user has either cancelled the passcode process, in which case `error` will be nil.  Or the user has failed to unlock with their passcode, in
+which case `error` will not be nil.
+
 ## Customisation
 
 You can pass `DMPasscode` a configuration. Just create a new `DMPasscodeConfiguration`.  

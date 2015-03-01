@@ -64,17 +64,23 @@
 }
 
 - (void)actionSetup:(UIButton *)sender {
-    [DMPasscode setupPasscodeInViewController:_rootViewController completion:^(BOOL success) {
+    [DMPasscode setupPasscodeInViewController:_rootViewController completion:^(BOOL success, NSError *error) {
         [self updateViews];
     }];
 }
 
 - (void)actionCheck:(UIButton *)sender {
-    [DMPasscode showPasscodeInViewController:_rootViewController completion:^(BOOL success) {
+    [DMPasscode showPasscodeInViewController:_rootViewController completion:^(BOOL success, NSError *error) {
         if (success) {
             [sender setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
         } else {
-            [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            if (error) {
+                // Failed authentication
+                [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            } else {
+                // Cancelled
+                [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            }
         }
         [self updateViews];
     }];
@@ -95,10 +101,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     if ([DMPasscode isPasscodeSet] && !_showingPasscode) {
         _showingPasscode = YES;
-        [DMPasscode showPasscodeInViewController:self.window.rootViewController completion:^(BOOL success) {
+        [DMPasscode showPasscodeInViewController:self.window.rootViewController completion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"Win");
             }else{
+
                 NSLog(@"Loss");
             }
         }];
