@@ -95,7 +95,11 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
                 if (error) {
                     switch (error.code) {
                         case LAErrorUserCancel:
+                            _completion(NO, nil);
+                            break;
                         case LAErrorSystemCancel:
+                            _completion(NO, nil);
+                            break;
                         case LAErrorAuthenticationFailed:
                             _completion(NO, error);
                             break;
