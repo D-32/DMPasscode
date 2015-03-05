@@ -1,5 +1,5 @@
 PODS:
-  - DMPasscode (1.3.0)
+  - DMPasscode (2.0.0)
   - Expecta (0.3.2)
   - Expecta+Snapshots (1.3.1):
     - Expecta
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DMPasscode: ddf49d4429a4d4c589d3ebf638408a44d7ea006a
+  DMPasscode: baac9f4c608d6916589e94ced1797cae0b769aab
   Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
   Expecta+Snapshots: 4a56b9411c6ed156987072e52c39de67d864015a
   FBSnapshotTestCase: e2914fbaabccea1dcc773d6a16b1c24540642488
