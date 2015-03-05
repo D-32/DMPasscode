@@ -4,4 +4,5 @@
 "dmpasscode_not_match" = "Your codes did not match.\nPlease try again.";
 "dmpasscode_okay" = "Okay";
 "dmpasscode_n_left" = "%i attempts left";
+"dmpasscode_1_left" = "1 attempt left";
 "dmpasscode_touchid_reason" = "Authenticate to access locked feature.";
