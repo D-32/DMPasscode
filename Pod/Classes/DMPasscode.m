@@ -140,6 +140,7 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
     _count = 0;
     _passcodeViewController = [[DMPasscodeInternalViewController alloc] initWithDelegate:self config:_config];
     DMPasscodeInternalNavigationController* nc = [[DMPasscodeInternalNavigationController alloc] initWithRootViewController:_passcodeViewController];
+    [nc setModalPresentationStyle:UIModalPresentationFormSheet];
     [viewController presentViewController:nc animated:YES completion:nil];
     if (_mode == 0) {
         [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
