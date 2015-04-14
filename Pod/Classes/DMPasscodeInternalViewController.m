@@ -74,6 +74,8 @@
     container.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     for (int i = 0; i < 4; i++) {
         DMPasscodeInternalField* field = [[DMPasscodeInternalField alloc] initWithFrame:CGRectMake(((itemWidth + space) * i), 0, itemWidth, itemWidth) config:_config];
+        UITapGestureRecognizer* singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        [field addGestureRecognizer:singleFingerTap];
         [container addSubview:field];
         [_textFields addObject:field];
     }
@@ -86,6 +88,13 @@
     _input.keyboardType = UIKeyboardTypeNumberPad;
     _input.keyboardAppearance = _config.inputKeyboardAppearance;
     [self.view addSubview:_input];
+    [_input becomeFirstResponder];
+}
+
+-(void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    if([_input isFirstResponder]){
+        [_input resignFirstResponder];
+    }
     [_input becomeFirstResponder];
 }
 
