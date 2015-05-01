@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "DMPasscode"
-  s.version          = "2.0.0"
+  s.version          = "2.0.1"
   s.summary          = "Passcode screen with Touch ID support"
   s.homepage         = "https://github.com/d-32/DMPasscode"
   s.license          = 'Public Domain'

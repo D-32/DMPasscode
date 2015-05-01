@@ -12,7 +12,7 @@ A matcher framework for Objective-C and Cocoa.
 The main advantage of using Expecta over other matcher frameworks is that you do not have to specify the data types. Also, the syntax of Expecta matchers is much more readable and does not suffer from parenthesitis.
 
 ```objective-c
-expect(@"foo").to.equal(@"foo"); // `to` is a syntatic sugar and can be safely omitted.
+expect(@"foo").to.equal(@"foo"); // `to` is a syntactic sugar and can be safely omitted.
 expect(foo).notTo.equal(1);
 expect([bar isBar]).to.equal(YES);
 expect(baz).to.equal(3.14159);
@@ -57,11 +57,11 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 1. Clone Expecta from Github.
 2. Run `rake` in your project directory to build the frameworks and libraries.
 3. Add a Cocoa or Cocoa Touch Unit Testing Bundle target to your Xcode project if you don't already have one.
-4. For **OS X projects**, copy and add `Specta.framework` in the `build/Release` folder to your project's test target.
+4. For **OS X projects**, copy and add `Expecta.framework` in the `Products/osx` folder to your project's test target.
 
-   For **iOS projects**, copy and add `Specta.framework` in the `build/Release-ios-universal` folder to your project's test target.
+   For **iOS projects**, copy and add `Expecta.framework` in the `Products/ios` folder to your project's test target.
    
-   You can also use `libSpecta.a` if you prefer to link Expecta as a static library — iOS 7.x and below require this.
+   You can also use `libExpecta.a` if you prefer to link Expecta as a static library — iOS 7.x and below require this.
    
 6. Add `-ObjC` and `-all_load` to the **Other Linker Flags** build setting for the test target in your Xcode project.
 7. You can now use Expecta in your test classes by adding the following import:
@@ -78,7 +78,7 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 
 > `expect(x).to.equal(y);` compares objects or primitives x and y and passes if they are identical (==) or equivalent isEqual:).
 
-> `expect(x).to.beIdenticalTo(y);` compares objects x and y and passes if they are identical and have the same memory ddress.
+> `expect(x).to.beIdenticalTo(y);` compares objects x and y and passes if they are identical and have the same memory address.
 
 > `expect(x).to.beNil();` passes if x is nil.
 
@@ -88,17 +88,17 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 
 > `expect(x).to.contain(y);` passes if an instance of NSArray or NSString x contains y.
 
-> `expect(x).to.beSupersetOf(y);` passes if an instance of NSArray, NSSet, NSDictionary or NSOrderedSet x contains all lements of y.
+> `expect(x).to.beSupersetOf(y);` passes if an instance of NSArray, NSSet, NSDictionary or NSOrderedSet x contains all elements of y.
 
-> `expect(x).to.haveCountOf(y);` passes if an instance of NSArray, NSSet, NSDictionary or NSString x has a count or length f y.
+> `expect(x).to.haveCountOf(y);` passes if an instance of NSArray, NSSet, NSDictionary or NSString x has a count or length of y.
 
 > `expect(x).to.beEmpty();` passes if an instance of NSArray, NSSet, NSDictionary or NSString x has a count or length of .
 
 > `expect(x).to.beInstanceOf([Foo class]);` passes if x is an instance of a class Foo.
 
-> `expect(x).to.beKindOf([Foo class]);` passes if x is an instance of a class Foo or if x is an instance of any class that nherits from the class Foo.
+> `expect(x).to.beKindOf([Foo class]);` passes if x is an instance of a class Foo or if x is an instance of any class that inherits from the class Foo.
 
-> `expect([Foo class]).to.beSubclassOf([Bar class]);` passes if the class Foo is a subclass of the class Bar or if it is dentical to the class Bar. Use beKindOf() for class clusters.
+> `expect([Foo class]).to.beSubclassOf([Bar class]);` passes if the class Foo is a subclass of the class Bar or if it is identical to the class Bar. Use beKindOf() for class clusters.
 
 > `expect(x).to.beLessThan(y);` passes if `x` is less than `y`.
 
@@ -114,7 +114,7 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 
 > `expect(x).to.beCloseToWithin(y, z);` passes if `x` is close to `y` within `z`.
 
-> `expect(^{ /* code */ }).to.raise(@"ExceptionName");` passes if a given block of code raises an exception named ExceptionName`.
+> `expect(^{ /* code */ }).to.raise(@"ExceptionName");` passes if a given block of code raises an exception named `ExceptionName`.
 
 > `expect(^{ /* code */ }).to.raiseAny();` passes if a given block of code raises any exception.
 
@@ -124,11 +124,12 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 
 > `expect(^{ /* code */ }).to.notify(@"NotificationName");` passes if a given block of code generates an NSNotification amed `NotificationName`.
 
-> `expect(^{ /* code */ }).to.notify(notification);` passes if a given block of code generates an NSNotification equal to he passed `notification`.
+> `expect(^{ /* code */ }).to.notify(notification);` passes if a given block of code generates an NSNotification equal to the passed `notification`.
 
 > `expect(x).to.beginWith(y);` passes if an instance of NSString, NSArray, or NSOrderedSet `x` begins with `y`. Also liased by `startWith`
 
 > `expect(x).to.endWith(y);` passes if an instance of NSString, NSArray, or NSOrderedSet `x` ends with `y`.
+
 
 ## Inverting Matchers
 
@@ -169,6 +170,13 @@ describe(@"Foo", ^{
   });
 });
 ```
+
+## Forced Failing
+
+You can fail a test by using the `failure` attribute. This can be used to test branching.
+
+> `failure(@"This should not happen");` outright fails a test.
+
 
 ## Writing New Matchers
 
