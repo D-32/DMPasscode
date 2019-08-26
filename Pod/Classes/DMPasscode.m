@@ -95,13 +95,13 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
                 if (error) {
                     switch (error.code) {
                         case LAErrorUserCancel:
-                            _completion(NO, nil);
+                            self->_completion(NO, nil);
                             break;
                         case LAErrorSystemCancel:
-                            _completion(NO, nil);
+                            self->_completion(NO, nil);
                             break;
                         case LAErrorAuthenticationFailed:
-                            _completion(NO, error);
+                            self->_completion(NO, error);
                             break;
                         case LAErrorPasscodeNotSet:
                         case LAErrorTouchIDNotEnrolled:
@@ -111,7 +111,7 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
                             break;
                     }
                 } else {
-                    _completion(success, nil);
+                    self->_completion(success, nil);
                 }
             });
         }];
@@ -151,7 +151,7 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
 
 - (void)closeAndNotify:(BOOL)success withError:(NSError *)error {
     [_passcodeViewController dismissViewControllerAnimated:YES completion:^() {
-        _completion(success, error);
+        self->_completion(success, error);
     }];
 }
 
