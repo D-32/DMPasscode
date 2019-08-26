@@ -1,8 +1,10 @@
-target 'DMPasscode', :exclusive => true do
+platform :ios, '8.0'
+
+target 'DMPasscode' do
   pod "DMPasscode", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'Tests' do
   pod "DMPasscode", :path => "../"
 
   pod 'Specta', '~> 0.2.1'
