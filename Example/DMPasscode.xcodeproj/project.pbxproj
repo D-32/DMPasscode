@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D7255806FD4426B9F6D6FD4 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B51248A87F48C3A0A0A014 /* libPods-Tests.a */; };
-		51B875A9378A4FF0B50808B3 /* libPods-DMPasscode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4E13D7A49C47F19ABB0C91 /* libPods-DMPasscode.a */; };
+		267ED4B99B2D21FF73C973E2 /* libPods-DMPasscode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A9CCF0AC3CB91B5D2598E9 /* libPods-DMPasscode.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -21,6 +20,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		78633C4DB0FCC8D54B2CE86D /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE27FC87EFA729BDC8E60C0A /* libPods-Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,13 +53,13 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6A7507787FC44B769011E24F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		7BB550C53786F18EB50CBA9E /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		96B51248A87F48C3A0A0A014 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EE2955A9110C0BAE0535C67 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		99223ECC932347BCB3D78023 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		C9218A9104BCEE3C6FA88A0C /* Pods-DMPasscode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMPasscode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMPasscode/Pods-DMPasscode.debug.xcconfig"; sourceTree = "<group>"; };
-		E215462A814ECCEE835AB183 /* Pods-DMPasscode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMPasscode.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMPasscode/Pods-DMPasscode.release.xcconfig"; sourceTree = "<group>"; };
-		E9F3DE5A5E614F17C108CF05 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		ED4E13D7A49C47F19ABB0C91 /* libPods-DMPasscode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMPasscode.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A9CCF0AC3CB91B5D2598E9 /* libPods-DMPasscode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMPasscode.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDB021A6AC51E3EE5170303 /* Pods-DMPasscode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMPasscode.release.xcconfig"; path = "Target Support Files/Pods-DMPasscode/Pods-DMPasscode.release.xcconfig"; sourceTree = "<group>"; };
+		C5BBBDF508077D06BFB83480 /* Pods-DMPasscode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMPasscode.debug.xcconfig"; path = "Target Support Files/Pods-DMPasscode/Pods-DMPasscode.debug.xcconfig"; sourceTree = "<group>"; };
+		D33D14CBBAF21F8F39AA2ADB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FE27FC87EFA729BDC8E60C0A /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				51B875A9378A4FF0B50808B3 /* libPods-DMPasscode.a in Frameworks */,
+				267ED4B99B2D21FF73C973E2 /* libPods-DMPasscode.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,13 +81,25 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				3D7255806FD4426B9F6D6FD4 /* libPods-Tests.a in Frameworks */,
+				78633C4DB0FCC8D54B2CE86D /* libPods-Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BC831A3145A814766BED8B0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C5BBBDF508077D06BFB83480 /* Pods-DMPasscode.debug.xcconfig */,
+				BFDB021A6AC51E3EE5170303 /* Pods-DMPasscode.release.xcconfig */,
+				D33D14CBBAF21F8F39AA2ADB /* Pods-Tests.debug.xcconfig */,
+				7EE2955A9110C0BAE0535C67 /* Pods-Tests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +108,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				6F2A5A3BF2DA626B330FDD27 /* Pods */,
+				3BC831A3145A814766BED8B0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,8 +128,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				ED4E13D7A49C47F19ABB0C91 /* libPods-DMPasscode.a */,
-				96B51248A87F48C3A0A0A014 /* libPods-Tests.a */,
+				B7A9CCF0AC3CB91B5D2598E9 /* libPods-DMPasscode.a */,
+				FE27FC87EFA729BDC8E60C0A /* libPods-Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,17 +185,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		6F2A5A3BF2DA626B330FDD27 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C9218A9104BCEE3C6FA88A0C /* Pods-DMPasscode.debug.xcconfig */,
-				E215462A814ECCEE835AB183 /* Pods-DMPasscode.release.xcconfig */,
-				E9F3DE5A5E614F17C108CF05 /* Pods-Tests.debug.xcconfig */,
-				7BB550C53786F18EB50CBA9E /* Pods-Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,11 +192,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DMPasscode" */;
 			buildPhases = (
-				D0134B1130CF4B59B939976B /* Check Pods Manifest.lock */,
+				2450880A9B52924C971D4742 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				16320F878D184EE9BEE7143E /* Copy Pods Resources */,
+				CEA5685D3CEFC26FA58EB985 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,11 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				485338F90DDE4C4CB1C8061F /* Check Pods Manifest.lock */,
+				F1C98FFD408F7F293D013356 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				C71DB6A88165403188E851EF /* Copy Pods Resources */,
+				9F501ABC4A613D0098FD51DD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,6 +247,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -281,64 +283,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16320F878D184EE9BEE7143E /* Copy Pods Resources */ = {
+		2450880A9B52924C971D4742 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DMPasscode-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMPasscode/Pods-DMPasscode-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		485338F90DDE4C4CB1C8061F /* Check Pods Manifest.lock */ = {
+		9F501ABC4A613D0098FD51DD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/DMPasscode/DMPasscode.bundle",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DMPasscode.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C71DB6A88165403188E851EF /* Copy Pods Resources */ = {
+		CEA5685D3CEFC26FA58EB985 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DMPasscode/Pods-DMPasscode-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/DMPasscode/DMPasscode.bundle",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DMPasscode.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMPasscode/Pods-DMPasscode-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D0134B1130CF4B59B939976B /* Check Pods Manifest.lock */ = {
+		F1C98FFD408F7F293D013356 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -423,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -456,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -465,7 +487,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9218A9104BCEE3C6FA88A0C /* Pods-DMPasscode.debug.xcconfig */;
+			baseConfigurationReference = C5BBBDF508077D06BFB83480 /* Pods-DMPasscode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -479,7 +501,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E215462A814ECCEE835AB183 /* Pods-DMPasscode.release.xcconfig */;
+			baseConfigurationReference = BFDB021A6AC51E3EE5170303 /* Pods-DMPasscode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -493,7 +515,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9F3DE5A5E614F17C108CF05 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = D33D14CBBAF21F8F39AA2ADB /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DMPasscode.app/DMPasscode";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -516,7 +538,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BB550C53786F18EB50CBA9E /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = 7EE2955A9110C0BAE0535C67 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DMPasscode.app/DMPasscode";
 				FRAMEWORK_SEARCH_PATHS = (
